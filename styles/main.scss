@@ -1,0 +1,18 @@
+// Import all required css here and import this file to top component
+// Example:
+// @import
+//   'base/reset',
+//   'base/typography';
+
+// Abstracts
+@import 'abstracts/variables';
+
+// Base
+@import 'base/base';
+
+// Components
+
+// Layout
+
+// Pages
+@import 'pages/main-page';
