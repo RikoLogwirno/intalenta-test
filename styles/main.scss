@@ -5,7 +5,9 @@
 //   'base/typography';
 
 // Abstracts
-@import 'abstracts/variables';
+@import 
+  'abstracts/typography',
+  'abstracts/variables';
 
 // Base
 @import 'base/base';
