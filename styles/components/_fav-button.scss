@@ -1,0 +1,19 @@
+.fav-button {
+  > img {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0px 1px 6px rgb(var(--callout-border-rgb)));
+    cursor: pointer;
+    transition: all .3s;
+
+    &:hover {
+      transform: scale(1.4);
+      transition: all .3s;
+    }
+
+    &:active {
+      transform: scale(1);
+      transition: all .3s;
+    }
+  }
+}
