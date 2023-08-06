@@ -1,10 +1,7 @@
 import Image from "next/image";
 
+import { FavButtonTypes } from "@/types";
 import { HeartCircle, HeartCircleOutline } from "@/assets";
-
-type FavButtonTypes = {
-  status: boolean;
-};
 
 export default function FavButton(props: FavButtonTypes) {
   return (

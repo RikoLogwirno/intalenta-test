@@ -1,14 +1,7 @@
+import { BookCardTypes } from "@/types";
+
 import Card from "./Card";
 import FavButton from "./FavButton";
-
-type BookCardTypes = {
-  id: number;
-  title: string;
-  author: string;
-  description: string;
-  cover: string;
-  publicationDate: string;
-};
 
 export default function BookCard(props: BookCardTypes) {
   return (

@@ -1,7 +1,4 @@
-type CardTypes = {
-  children?: React.ReactElement | React.ReactElement[];
-  onClick?: () => any;
-};
+import { CardTypes } from "@/types";
 
 export default function Card(props: CardTypes) {
   return (
