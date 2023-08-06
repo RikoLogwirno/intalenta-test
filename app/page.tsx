@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
-export default function Home() {
+export default function HomePage() {
   const [isDark, setIsDark] = useState<boolean>(true);
 
   return (
