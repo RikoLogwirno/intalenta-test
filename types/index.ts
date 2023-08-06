@@ -16,3 +16,9 @@ export type FavButtonTypes = {
   status: boolean;
   onClick?: () => any;
 };
+
+export type PaginationNumberType = {
+  totalPage: number;
+  currentPage: number;
+  onItemClick?: (page: number) => any;
+};

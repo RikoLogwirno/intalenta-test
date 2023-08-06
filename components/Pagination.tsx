@@ -1,10 +1,6 @@
 'use client';
 
-type PaginationNumberType = {
-  totalPage: number;
-  currentPage: number;
-  onItemClick?: (page: number) => any;
-};
+import { PaginationNumberType } from "@/types";
 
 export default function PaginationNumber(props: PaginationNumberType) {
   let shownNumber = window.innerWidth <= 768 ? 3 : 5;
