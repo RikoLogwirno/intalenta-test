@@ -1,8 +1,5 @@
-import Image from "next/image";
-
-import { HeartCircle, HeartCircleOutline } from "@/assets";
-
 import Card from "./Card";
+import FavButton from "./FavButton";
 
 type BookCardTypes = {
   id: number;
@@ -25,9 +22,7 @@ export default function BookCard(props: BookCardTypes) {
           <p className="font-m">{ props.description }</p>
           <p className="font-s">{ props.author }</p>
           <p className="font-s">{ props.publicationDate }</p>
-          <div>
-            <Image src={ HeartCircle } alt="HeartCircle" />
-          </div>
+          <FavButton status={ false } />
         </div>
       </div>
     </Card>
