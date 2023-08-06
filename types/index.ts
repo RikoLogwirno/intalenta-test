@@ -14,4 +14,5 @@ export type CardTypes = {
 
 export type FavButtonTypes = {
   status: boolean;
+  onClick?: () => any;
 };
