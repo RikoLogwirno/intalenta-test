@@ -22,3 +22,9 @@ export type PaginationNumberType = {
   currentPage: number;
   onItemClick?: (page: number) => any;
 };
+
+export type BookParamsType = {
+  params: {
+    bookId: string;
+  };
+};
