@@ -35,10 +35,10 @@ export default function PaginationNumber(props: PaginationNumberType) {
         {
           (props.currentPage - shownNumberCalc.min) > 1 ?
             <>
-              <div onClick={ handleOnItemClick(1) }>
+              <div className="box" onClick={ handleOnItemClick(1) }>
                 <p>1</p>
               </div>
-              <div>
+              <div className="triple-dots">
                 <p>. . .</p>
               </div>
             </> :
