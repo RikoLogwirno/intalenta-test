@@ -1,33 +1,21 @@
+'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 
 export default function Home() {
+  const [isDark, setIsDark] = useState<boolean>(true);
+
   return (
     <main className="main">
       <div className="description">
         <p>
-          Get started by editing&nbsp;
-          <code className="code">app/page.tsx</code>
+          Intalenta books test by Riko Logwirno
         </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{ ' ' }
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="vercelLogo"
-              width={ 100 }
-              height={ 24 }
-              priority
-            />
-          </a>
-        </div>
+        <p className="pointer" onClick={ () => setIsDark(!isDark) }>{ isDark ? "Dark" : "Light" }</p>
       </div>
 
       <div className="center">
+        <p>Build using</p>
         <Image
           className="logo"
           src="/next.svg"
@@ -38,57 +26,26 @@ export default function Home() {
         />
       </div>
 
-
-
       <div className="grid">
         <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="/books"
           className="card"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           <h2>
-            Docs <span>-&gt;</span>
+            Book List <span>-&gt;</span>
           </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
+          <p>Click here to see book list and book detail for test</p>
         </a>
-
         <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+          href="https://rikologwirno.github.io"
           className="card"
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-            Learn <span>-&gt;</span>
+            My Profile <span>-&gt;</span>
           </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="card"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="card"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
+          <p>Click here to preview my Profile on github page</p>
         </a>
       </div>
     </main>
