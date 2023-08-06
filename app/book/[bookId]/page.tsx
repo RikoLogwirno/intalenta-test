@@ -19,7 +19,6 @@ export default function BookPage(props: BookParamsType) {
   return (
     <main className="book">
       <div>
-        {/* Background cover blurred and brightness down */ }
         <img src={ sampleData.cover } alt={ sampleData.title } />
       </div>
       <div>
