@@ -8,7 +8,6 @@ export const bookFavStore = create<BooksFavType>()(
     set => ({
       books: [],
       toggleFav: (id, status) => set((state: BooksFavType) => {
-        // const favIds = state;
         if (state.books.find(v => v === id) && !status) {
           state.books.splice(state.books.indexOf(id), 1);
         } else {
