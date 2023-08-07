@@ -9,36 +9,47 @@ import BookCard from "@/components/BookCard";
 import cutDescription from "@/libraries/cutDescription";
 import formatDateString from "@/libraries/formatDate";
 import PaginationNumber from "@/components/Pagination";
+import { bookStore } from "@/store/booksStore";
+import { bookFavStore } from "@/store/booksFav";
 
 export default function BooksPage() {
   const { push } = useRouter();
+  const bookCacheState = bookStore();
+  const bookFavState = bookFavStore();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState(true);
   const [datas, setDatas] = useState<BookType[]>([]);
-  const [favoritesId, setFavoritesId] = useState<number[]>([]);
 
   useEffect(() => {
-    const { books } = endpoints;
-    fetchAPI<BookType[]>({ ...books })
-      .then(res => {
-        setDatas(res);
-        setIsLoading(false);
-      })
-      .catch(err => {
-        setIsLoading(false);
-        console.warn(err);
-      });
+    shouldGetNewBooks();
   }, []);
 
   function toggleFav(status: boolean, id: number) {
-    const favIds = [...favoritesId];
-    if (favIds.find(v => v === id) && !status) {
-      favIds.splice(favIds.indexOf(id), 1);
+    bookFavState.toggleFav(id, status);
+  }
+
+  function shouldGetNewBooks() {
+    const lastCached = new Date(bookCacheState.timeStamp ?? '');
+    lastCached.setTime(lastCached.getTime() + (1 * 60 * 60 * 1000));
+
+    if (!bookCacheState.timeStamp || new Date() > lastCached) {
+      const { books } = endpoints;
+      fetchAPI<BookType[]>({ ...books })
+        .then(res => {
+          setDatas(res);
+          bookCacheState.replaceBooks(res);
+          setIsLoading(false);
+        })
+        .catch(err => {
+          setIsLoading(false);
+          console.warn(err);
+        });
+      console.log('Invalid cache or newly open');
     } else {
-      favIds.push(id);
+      console.log('loaded from cache');
+      setDatas(bookCacheState.books);
     }
-    setFavoritesId(favIds);
   }
 
   const pageToShow = 5;
@@ -57,7 +68,7 @@ export default function BooksPage() {
                 { ...data }
                 description={ cutDescription(data.description) }
                 publicationDate={ formatDateString(data.publicationDate) }
-                isFav={ favoritesId.indexOf(data.id) >= 0 }
+                isFav={ bookFavState.books.indexOf(data.id) >= 0 }
                 onFavToggle={ status => toggleFav(status, data.id) }
                 onClick={ () => push(`/book/${ data.id }`) }
               />

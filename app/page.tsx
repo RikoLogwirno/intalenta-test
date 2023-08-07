@@ -1,9 +1,18 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import Image from 'next/image';
 
+import { darkThemeStore } from '@/store/darkThemeStore';
+
 export default function HomePage() {
-  const [isDark, setIsDark] = useState<boolean>(true);
+  const { isDark, setIsDark } = darkThemeStore();
+
+  const [isDarkState, setIsDarkState] = useState(true);
+
+  // Hack for SSR issue
+  useEffect(() => {
+    setIsDarkState(isDark);
+  }, [isDark]);
 
   return (
     <main className="main">
@@ -11,7 +20,7 @@ export default function HomePage() {
         <p>
           Intalenta books test by Riko Logwirno
         </p>
-        <p className="pointer" onClick={ () => setIsDark(!isDark) }>{ isDark ? "Dark" : "Light" }</p>
+        <p className="pointer" onClick={ () => setIsDark(!isDarkState) }>{ isDarkState ? "Dark" : "Light" }</p>
       </div>
 
       <div className="center">

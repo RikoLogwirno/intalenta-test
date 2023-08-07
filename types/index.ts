@@ -50,3 +50,25 @@ export type BookType = {
   cover: string;
   publicationDate: string;
 };
+
+export type DarkThemeStateType = {
+  isDark: boolean;
+  setIsDark: (status: boolean) => void;
+};
+
+export type BooksStateType = {
+  books: BookType[];
+  timeStamp?: string;
+  replaceBooks: (books: BookType[]) => void;
+};
+
+export type BookDetailStateType = {
+  book?: BookType;
+  timeStamp?: string;
+  replaceBook: (books: BookType) => void;
+};
+
+export type BooksFavType = {
+  books: number[];
+  toggleFav: (id: number, status: boolean) => void;
+};

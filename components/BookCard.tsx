@@ -1,6 +1,4 @@
 'use client';
-import { useState } from "react";
-
 import { BookCardTypes } from "@/types";
 
 import Card from "./Card";
