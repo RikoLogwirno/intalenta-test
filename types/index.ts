@@ -1,3 +1,5 @@
+import { MouseEvent } from "react";
+
 export type BookCardTypes = {
   id: number;
   title: string;
@@ -17,7 +19,7 @@ export type CardTypes = {
 
 export type FavButtonTypes = {
   status: boolean;
-  onClick?: () => any;
+  onClick?: (ev: MouseEvent<HTMLDivElement>) => any;
 };
 
 export type PaginationNumberType = {
