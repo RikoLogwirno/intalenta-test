@@ -1,10 +1,11 @@
 'use client';
 
 import { PaginationNumberType } from "@/types";
+import { useEffect, useState } from "react";
 
 export default function PaginationNumber(props: PaginationNumberType) {
-  let shownNumber = window.innerWidth <= 768 ? 3 : 5;
-  shownNumber = shownNumber > props.totalPage ? props.totalPage : shownNumber;
+  const [shownNumber, setShownNumber] = useState<number>(5);
+
   const shownNumberCalc = {
     min: Math.floor(shownNumber / 2),
     max: Math.ceil(shownNumber / 2)
@@ -22,6 +23,16 @@ export default function PaginationNumber(props: PaginationNumberType) {
     props.onItemClick?.(page);
   };
 
+  useEffect(() => {
+    const shownNumberCheck = window.innerWidth <= 768 ? 3 : 5;
+    setShownNumber(shownNumberCheck);
+  }, []);
+
+  useEffect(() => {
+    const shownNumberCheck = shownNumber > props.totalPage ? props.totalPage : shownNumber;
+    setShownNumber(shownNumberCheck);
+  }, [props.totalPage, shownNumber]);
+
   return (
     <div className='pagination'>
       <div className={ `box arrow ${ props.currentPage === 1 ? 'disabled' : '' }` } onClick={ handleOnItemClick(props.currentPage - 1) }>
@@ -29,7 +40,7 @@ export default function PaginationNumber(props: PaginationNumberType) {
       </div>
       <div className='numbers'>
         {
-          (props.currentPage - shownNumberCalc.min) > 1 ?
+          (props.currentPage - shownNumberCalc.min) > 1 && props.totalPage !== shownNumber ?
             <>
               <div className="box" onClick={ handleOnItemClick(1) }>
                 <p>1</p>
@@ -48,7 +59,7 @@ export default function PaginationNumber(props: PaginationNumberType) {
           ))
         }
         {
-          (props.currentPage + shownNumberCalc.max) <= props.totalPage ?
+          (props.currentPage + shownNumberCalc.max) <= props.totalPage && props.totalPage !== shownNumber ?
             <>
               <div className="triple-dots">
                 <p>. . .</p>
