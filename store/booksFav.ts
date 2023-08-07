@@ -14,7 +14,7 @@ export const bookFavStore = create<BooksFavType>()(
           state.books.push(id);
         }
 
-        return state;
+        return { ...state };
       })
     }),
     {
