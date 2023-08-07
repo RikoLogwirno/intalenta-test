@@ -7,8 +7,6 @@ import Card from "./Card";
 import FavButton from "./FavButton";
 
 export default function BookCard(props: BookCardTypes) {
-  const [isFav, setIsFav] = useState<boolean>(false);
-
   return (
     <Card>
       <div className="book-card">
@@ -20,7 +18,7 @@ export default function BookCard(props: BookCardTypes) {
           <p className="font-m">{ props.description }</p>
           <p className="font-s">{ props.author }</p>
           <p className="font-s">{ props.publicationDate }</p>
-          <FavButton status={ isFav } onClick={ () => setIsFav(!isFav) } />
+          <FavButton status={ !!props.isFav } onClick={ () => props.onFavToggle?.(!props.isFav) } />
         </div>
       </div>
     </Card>
