@@ -1,34 +1,50 @@
 'use client';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-import { BookParamsType } from "@/types";
+import { BookParamsType, BookType } from "@/types";
 import FavButton from "@/components/FavButton";
-
-const sampleData = {
-  id: 1,
-  title: "To Kill a Mockingbird",
-  author: "Harper Lee",
-  description: "A classic of modern American literature that has been celebrated for its finely crafted characters and brilliant storytelling.",
-  cover: "https://m.media-amazon.com/images/I/51IXWZzlgSL._SX330_BO1,204,203,200_.jpg",
-  publicationDate: "1960-07-11T00:00:00.000Z"
-};
+import fetchAPI from "@/libraries/api";
+import endpoints from "@/configs/endpoints";
 
 export default function BookPage(props: BookParamsType) {
+  const { back } = useRouter();
+
   const [isFav, setIsFav] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [book, setBook] = useState<BookType>();
+
+  useEffect(() => {
+    const { booksId } = endpoints;
+    fetchAPI<BookType>({ ...booksId, url: `${ booksId.url }${ props.params.bookId }` })
+      .then(res => {
+        setBook(res);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setIsLoading(false);
+        console.warn(err);
+      });
+  }, []);
 
   return (
     <main className="book">
       <div>
-        <img src={ sampleData.cover } alt={ sampleData.title } />
+        <img src={ book?.cover } alt={ book?.title } />
       </div>
       <div>
-        <img src={ sampleData.cover } alt={ sampleData.title } />
+        <img src={ book?.cover } alt={ book?.title } />
       </div>
       <div>
-        <p className="font-xl">{ sampleData.title }</p>
-        <p className="font-l">{ sampleData.description }</p>
-        <p className="font-m">{ sampleData.author }</p>
-        <p className="font-m">{ sampleData.publicationDate }</p>
+        <div className="back-btn" onClick={ () => back() }>
+          <p>
+            { "< Back" }
+          </p>
+        </div>
+        <p className="font-xl">{ book?.title }</p>
+        <p className="font-l">{ book?.description }</p>
+        <p className="font-m">{ book?.author }</p>
+        <p className="font-m">{ book?.publicationDate }</p>
         <FavButton status={ isFav } onClick={ () => setIsFav(!isFav) } />
       </div>
     </main>
