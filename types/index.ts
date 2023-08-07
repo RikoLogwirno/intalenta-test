@@ -28,3 +28,21 @@ export type BookParamsType = {
     bookId: string;
   };
 };
+
+export type EndpointsType = {
+  [endpointName: string]: {
+    url: string;
+    options?: {
+      method?: string;
+    };
+  };
+};
+
+export type BookType = {
+  id: number;
+  title: string;
+  author: string;
+  description: string;
+  cover: string;
+  publicationDate: string;
+};
