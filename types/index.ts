@@ -7,6 +7,7 @@ export type BookCardTypes = {
   publicationDate: string;
   isFav?: boolean;
   onFavToggle?: (status: boolean) => any;
+  onClick?: () => any;
 };
 
 export type CardTypes = {

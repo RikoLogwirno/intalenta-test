@@ -8,7 +8,7 @@ import FavButton from "./FavButton";
 
 export default function BookCard(props: BookCardTypes) {
   return (
-    <Card>
+    <Card onClick={ props.onClick }>
       <div className="book-card">
         <div className="cover">
           <img src={ props.cover } alt={ props.title } />
