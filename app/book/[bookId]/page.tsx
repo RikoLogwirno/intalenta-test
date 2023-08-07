@@ -8,6 +8,7 @@ import fetchAPI from "@/libraries/api";
 import endpoints from "@/configs/endpoints";
 import { bookDetailStore } from "@/store/bookDetailState";
 import { bookFavStore } from "@/store/booksFav";
+import formatDateString from "@/libraries/formatDate";
 
 export default function BookPage(props: BookParamsType) {
   const { back } = useRouter();
@@ -70,7 +71,7 @@ export default function BookPage(props: BookParamsType) {
         <p className="font-xl">{ book?.title }</p>
         <p className="font-l">{ book?.description }</p>
         <p className="font-m">{ book?.author }</p>
-        <p className="font-m">{ book?.publicationDate }</p>
+        <p className="font-m">{ formatDateString(book?.publicationDate ?? '') }</p>
         <FavButton
           status={ !!bookFavState.books.find(v => v === book?.id) }
           onClick={ () => book?.id && toggleFav(book?.id, !isFav) }
