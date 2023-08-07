@@ -1,9 +1,11 @@
 'use client';
-import { useState } from 'react';
 import Image from 'next/image';
+import { useRecoilState } from 'recoil';
+
+import { darkThemeStore } from '@/store/darkThemeStore';
 
 export default function HomePage() {
-  const [isDark, setIsDark] = useState<boolean>(true);
+  const [isDark, setIsDark] = useRecoilState(darkThemeStore);
 
   return (
     <main className="main">
