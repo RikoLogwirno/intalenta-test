@@ -24,14 +24,10 @@ export default function PaginationNumber(props: PaginationNumberType) {
   };
 
   useEffect(() => {
-    const shownNumberCheck = window.innerWidth <= 768 ? 3 : 5;
-    setShownNumber(shownNumberCheck);
-  }, []);
+    setShownNumber(props.shownPageNumber ?? 0);
+  }, [props.shownPageNumber]);
 
-  useEffect(() => {
-    const shownNumberCheck = shownNumber > props.totalPage ? props.totalPage : shownNumber;
-    setShownNumber(shownNumberCheck);
-  }, [props.totalPage, shownNumber]);
+
 
   return (
     <div className='pagination'>
