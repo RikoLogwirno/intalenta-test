@@ -13,6 +13,7 @@ export default function BooksPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState(true);
   const [datas, setDatas] = useState<BookType[]>([]);
+  const [favoritesId, setFavoritesId] = useState<number[]>([]);
 
   useEffect(() => {
     const { books } = endpoints;
@@ -27,9 +28,20 @@ export default function BooksPage() {
       });
   }, []);
 
+  function toggleFav(status: boolean, id: number) {
+    const favIds = [...favoritesId];
+    if (favIds.find(v => v === id) && !status) {
+      favIds.splice(favIds.indexOf(id), 1);
+    } else {
+      favIds.push(id);
+    }
+    setFavoritesId(favIds);
+  }
+
   const pageToShow = 5;
   let totalPage = Math.ceil(datas.length / pageToShow);
   let dataToShow = datas.slice((pageToShow * currentPage) - pageToShow, pageToShow * currentPage);
+  const maxPageNumberShown = 5;
 
   return (
     <main className="standard-page books">
@@ -42,12 +54,19 @@ export default function BooksPage() {
                 { ...data }
                 description={ cutDescription(data.description) }
                 publicationDate={ formatDateString(data.publicationDate) }
+                isFav={ favoritesId.indexOf(data.id) >= 0 }
+                onFavToggle={ status => toggleFav(status, data.id) }
               />
             ))
           }
         </div>
         <div>
-          <PaginationNumber totalPage={ totalPage } currentPage={ currentPage } onItemClick={ page => setCurrentPage(page) } />
+          <PaginationNumber
+            totalPage={ totalPage }
+            currentPage={ currentPage }
+            shownPageNumber={ maxPageNumberShown > totalPage ? totalPage : maxPageNumberShown }
+            onItemClick={ page => setCurrentPage(page) }
+          />
         </div>
       </section>
     </main>
