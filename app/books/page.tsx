@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { BookType } from "@/types";
 import fetchAPI from "@/libraries/api";
@@ -10,6 +11,8 @@ import formatDateString from "@/libraries/formatDate";
 import PaginationNumber from "@/components/Pagination";
 
 export default function BooksPage() {
+  const { push } = useRouter();
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState(true);
   const [datas, setDatas] = useState<BookType[]>([]);
@@ -56,6 +59,7 @@ export default function BooksPage() {
                 publicationDate={ formatDateString(data.publicationDate) }
                 isFav={ favoritesId.indexOf(data.id) >= 0 }
                 onFavToggle={ status => toggleFav(status, data.id) }
+                onClick={ () => push(`/book/${ data.id }`) }
               />
             ))
           }
