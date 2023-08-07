@@ -15,7 +15,6 @@ export default function BookPage(props: BookParamsType) {
   const bookDetailCacheState = bookDetailStore();
   const bookFavState = bookFavStore();
 
-  const [isFav, setIsFav] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const [book, setBook] = useState<BookType>();
 
@@ -73,8 +72,8 @@ export default function BookPage(props: BookParamsType) {
         <p className="font-m">{ book?.author }</p>
         <p className="font-m">{ formatDateString(book?.publicationDate ?? '') }</p>
         <FavButton
-          status={ !!bookFavState.books.find(v => v === book?.id) }
-          onClick={ () => book?.id && toggleFav(book?.id, !isFav) }
+          status={ bookFavState.books.indexOf(book?.id ?? 0) >= 0 }
+          onClick={ () => book?.id && toggleFav(book?.id, !(!!bookFavState.books.find(v => v === book?.id))) }
         />
       </div>
     </main>
