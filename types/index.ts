@@ -5,6 +5,8 @@ export type BookCardTypes = {
   description: string;
   cover: string;
   publicationDate: string;
+  isFav?: boolean;
+  onFavToggle?: (status: boolean) => any;
 };
 
 export type CardTypes = {
@@ -20,6 +22,7 @@ export type FavButtonTypes = {
 export type PaginationNumberType = {
   totalPage: number;
   currentPage: number;
+  shownPageNumber?: number;
   onItemClick?: (page: number) => any;
 };
 
