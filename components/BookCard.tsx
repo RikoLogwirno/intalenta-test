@@ -16,7 +16,13 @@ export default function BookCard(props: BookCardTypes) {
           <p className="font-m">{ props.description }</p>
           <p className="font-s">{ props.author }</p>
           <p className="font-s">{ props.publicationDate }</p>
-          <FavButton status={ !!props.isFav } onClick={ () => props.onFavToggle?.(!props.isFav) } />
+          <FavButton
+            status={ !!props.isFav }
+            onClick={ (ev) => {
+              ev.stopPropagation();
+              props.onFavToggle?.(!props.isFav);
+            } }
+          />
         </div>
       </div>
     </Card>
