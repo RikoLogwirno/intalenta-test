@@ -6,5 +6,11 @@ export default {
     options: {
       method: "GET"
     }
+  },
+  booksId: {
+    url: "books/",
+    options: {
+      method: "GET"
+    }
   }
 } as EndpointsType;
